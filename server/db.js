@@ -136,6 +136,7 @@ const getBootstrapStatements = () => {
         .filter(statement => !/^DROP TABLE/i.test(statement))
         .filter(statement => !/^INSERT INTO\s+`?Admin`?/i.test(statement))
         .filter(statement => !/^ALTER TABLE\s+`?Category`?/i.test(statement))
+        .filter(statement => !/^CREATE\s+(?:UNIQUE\s+)?INDEX/i.test(statement))
         .map(statement => {
             if (/^CREATE TABLE\s+IF\s+NOT\s+EXISTS/i.test(statement)) {
                 return statement;

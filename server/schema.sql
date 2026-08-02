@@ -217,33 +217,33 @@ CREATE TABLE IF NOT EXISTS `SiteSettings` (
   `mfsInstructions` TEXT
 );
 
--- Performance Indexes (IF NOT EXISTS guards prevent duplicate errors on re-run)
+-- Performance Indexes
 -- Customer: fast lookup by email (login, duplicate check)
-CREATE INDEX IF NOT EXISTS `idx_customer_email` ON `Customer` (`email`);
+CREATE INDEX `idx_customer_email` ON `Customer` (`email`);
 
 -- Product: homepage new-arrivals query, category browse
-CREATE INDEX IF NOT EXISTS `idx_product_category` ON `Product` (`categoryId`);
-CREATE INDEX IF NOT EXISTS `idx_product_subcategory` ON `Product` (`subCategoryId`);
-CREATE INDEX IF NOT EXISTS `idx_product_new_arrival` ON `Product` (`isNewArrival`, `createdAt`);
-CREATE INDEX IF NOT EXISTS `idx_product_free_shipping` ON `Product` (`isFreeShipping`);
+CREATE INDEX `idx_product_category` ON `Product` (`categoryId`);
+CREATE INDEX `idx_product_subcategory` ON `Product` (`subCategoryId`);
+CREATE INDEX `idx_product_new_arrival` ON `Product` (`isNewArrival`, `createdAt`);
+CREATE INDEX `idx_product_free_shipping` ON `Product` (`isFreeShipping`);
 
 -- Order: customer history, status filter, admin list
-CREATE INDEX IF NOT EXISTS `idx_order_customer` ON `Order` (`customerId`);
-CREATE INDEX IF NOT EXISTS `idx_order_status` ON `Order` (`status`);
-CREATE INDEX IF NOT EXISTS `idx_order_created` ON `Order` (`createdAt`);
+CREATE INDEX `idx_order_customer` ON `Order` (`customerId`);
+CREATE INDEX `idx_order_status` ON `Order` (`status`);
+CREATE INDEX `idx_order_created` ON `Order` (`createdAt`);
 
 -- OrderItem: batch-fetch items for many orders at once
-CREATE INDEX IF NOT EXISTS `idx_orderitem_order` ON `OrderItem` (`orderId`);
-CREATE INDEX IF NOT EXISTS `idx_orderitem_product` ON `OrderItem` (`productId`);
+CREATE INDEX `idx_orderitem_order` ON `OrderItem` (`orderId`);
+CREATE INDEX `idx_orderitem_product` ON `OrderItem` (`productId`);
 
 -- Review: product review listing
-CREATE INDEX IF NOT EXISTS `idx_review_product` ON `Review` (`productId`);
+CREATE INDEX `idx_review_product` ON `Review` (`productId`);
 
 -- Voucher: fast validate-by-code lookup
-CREATE INDEX IF NOT EXISTS `idx_voucher_code` ON `Voucher` (`code`);
+CREATE INDEX `idx_voucher_code` ON `Voucher` (`code`);
 
 -- SubCategory: category join
-CREATE INDEX IF NOT EXISTS `idx_subcategory_category` ON `SubCategory` (`categoryId`);
+CREATE INDEX `idx_subcategory_category` ON `SubCategory` (`categoryId`);
 
 
 -- Add Foreign Key for Category -> Product (Resolved Circular Dependency)
